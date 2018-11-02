@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="@string/most_popular"
+        android:id="@+id/menu_most_popular"
+        app:showAsAction="collapseActionView"/>
+    <item android:title="@string/highest_rated"
+        android:id="@+id/menu_highest_rated"
+        app:showAsAction="collapseActionView" />
+
+</menu>
