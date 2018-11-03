@@ -1,11 +1,13 @@
 package com.github.abstractkim.popularmoviesstage1.list;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,7 +53,8 @@ public class MainActivity extends AppCompatActivity implements MoviesContract.Vi
 
         unbinder = ButterKnife.bind(this);
 
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
+        RecyclerView.LayoutManager layoutManager =
+                new GridLayoutManager(this, calculateNoColumns(getApplicationContext()));
         moviesListing.setLayoutManager(layoutManager);
         adapter = new MoviesAdapter(movies, this);
         moviesListing.setAdapter(adapter);
@@ -66,6 +69,16 @@ public class MainActivity extends AppCompatActivity implements MoviesContract.Vi
                 }
             }
         });
+    }
+
+    public static int calculateNoColumns(Context context){
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        int scalingFactor = 200;
+        int noOfColumns = (int) (dpWidth / scalingFactor);
+        if(noOfColumns < 2)
+            noOfColumns = 2;
+        return noOfColumns;
     }
 
     @Override
